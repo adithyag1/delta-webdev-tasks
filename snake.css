@@ -1,4 +1,3 @@
-
 body {
   display: flex;
   flex-direction: column;
@@ -31,6 +30,8 @@ td{
 
 .starttime{
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: green;
 }
 
@@ -42,11 +43,8 @@ td{
   border-bottom: 2px solid green;
 }
 
-.startbtn{
-  flex-basis: 80%;
-  align-items: center;
-  padding-left: 45%;
-  border-bottom: 2px solid green;
+.dummy{
+  color: green;
 }
 
 #start{
@@ -55,9 +53,7 @@ td{
 }
 
 .time{
-  padding-left: 15%;
   color:greenyellow;
-  border-bottom: 2px solid green;
 }
 
 .leaderboard_div{
@@ -115,5 +111,5 @@ table{
   background-color: green;
   width: 25%;
   cursor: pointer;
-  border: 1px solid greenyellow
+  border: 1px solid greenyellow;
 }
