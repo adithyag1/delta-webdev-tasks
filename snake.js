@@ -30,8 +30,8 @@ let time=151;
 let html1;
 let msg;
 let leaderboard = localStorage.getItem('leaderboard')||"";
-if(leaderboard[0]===",") leaderboard.shift();
-if(leaderboard[leaderboard.length-1]===",") leaderboard.pop();
+if(leaderboard[0]===",") leaderboard=leaderboard.slice(1);
+if(leaderboard[leaderboard.length-1]===",") leaderboard=leaderboard.slice(0,-1);
 let scores = leaderboard.split(',');
 let highScore = localStorage.getItem("high-score") || 0;
 
