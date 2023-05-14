@@ -1,0 +1,132 @@
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: greenyellow;
+}
+
+tr{
+  align-items: center;
+  height: 20px;
+}
+
+td{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.wrapper {
+  margin-top: 2%;
+  max-width: 65vmin;
+  max-height: 70vmin;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid green;
+}
+
+.starttime{
+  display: flex;
+  background-color: green;
+}
+
+.game-details {
+  padding: 20px 27px;
+  display: flex;
+  justify-content: space-between;
+  font-size:larger;
+  border-bottom: 2px solid green;
+}
+
+.startbtn{
+  flex-basis: 80%;
+  align-items: center;
+  padding-left: 45%;
+  border-bottom: 2px solid green;
+}
+
+#start{
+  align-self: center;
+  background-color: greenyellow
+}
+
+.time{
+  padding-left: 15%;
+  color:greenyellow;
+  border-bottom: 2px solid green;
+}
+
+.leaderboard_div{
+  display: none;
+  margin-top: 2%;
+}
+
+
+.play-board {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template: repeat(20, 1fr) / repeat(20, 1fr);
+}
+
+
+.play-board .head {
+  background:greenyellow;
+}
+
+.play-board .body{
+  background: darkgreen;
+}
+
+.controls {
+  display: none;
+  justify-content: space-between;
+}
+.controls i {
+  padding: 25px 0;
+  text-align: center;
+  font-size: 1.3rem;
+  color: greenyellow;
+  background-color: green;
+  width: calc(100% / 4);
+  cursor: pointer;
+  border: 1px solid greenyellow
+}
+
+
+.eatenfood{
+  background-color: white;
+}
+
+table{
+  background-color: green;
+  color: greenyellow;
+  border:2px solid greenyellow;
+}
+
+@media screen{
+  .wrapper {
+    width: 90vmin;
+    height: 115vmin;
+  }
+  .game-details {
+    font-size: 1rem;
+    padding: 15px 27px;
+  }
+  .leaderboard{
+    width: 70vmin;
+    height: 70vmin;
+  }
+  .controls {
+    display: flex;
+  }
+  .controls i {
+    padding: 15px 0;
+    font-size: 1rem;
+  }
+}
