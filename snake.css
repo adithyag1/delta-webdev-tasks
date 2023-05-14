@@ -19,11 +19,9 @@ td{
 }
 
 .wrapper {
-  width: 90vmin;
-  height: 115vmin;
   margin-top: 2%;
-  max-width: 65vmin;
-  max-height: 70vmin;
+  width: 65vmin;
+  height: 70vmin;
   display: flex;
   overflow: hidden;
   flex-direction: column;
@@ -38,7 +36,7 @@ td{
 }
 
 .game-details {
-  padding: 20px 27px;
+  height: 5vmin;
   display: flex;
   justify-content: space-between;
   font-size:larger;
@@ -70,8 +68,8 @@ td{
 
 
 .play-board {
-  height: 100%;
-  width: 100%;
+  height: 65vmin;
+  width: 65vmin;
   display: grid;
   grid-template: repeat(20, 1fr) / repeat(20, 1fr);
 }
@@ -84,22 +82,6 @@ td{
 .play-board .body{
   background: darkgreen;
 }
-
-.controls {
-  display: none;
-  justify-content: space-between;
-}
-.controls i {
-  padding: 25px 0;
-  text-align: center;
-  font-size: 1.3rem;
-  color: greenyellow;
-  background-color: green;
-  width: calc(100% / 4);
-  cursor: pointer;
-  border: 1px solid greenyellow
-}
-
 
 .eatenfood{
   background-color: white;
@@ -124,9 +106,16 @@ table{
 
 .controls {
   display: flex;
+  justify-content: space-between;
 }
 
 .controls i {
-  padding: 15px 0;
-  font-size: 1rem;
+  height: 5vmin;;
+  text-align: center;
+  font-size: 1.3rem;
+  color: greenyellow;
+  background-color: green;
+  width: 25%;
+  cursor: pointer;
+  border: 1px solid greenyellow
 }
