@@ -93,7 +93,7 @@ const newfoods = () => {
         let foodX = Math.floor(Math.random() * 20) + 1;
         let foodY = Math.floor(Math.random() * 20) + 1;
         //position should not be repeated or on the snake or immediate next to the head while starting
-        if(!((foods_positions.includes([foodX,foodY]))||snake.includes([foodX,foodY])||(first_run&&foodY===5))){
+        if(!((foods_positions.includes([foodX,foodY]))||snake.includes([foodX,foodY])||(Math.abs(foodX-headx)<=3&&Math.abs(foodY-heady)))){
             foods_positions.push([foodX,foodY]);
         }
     }
