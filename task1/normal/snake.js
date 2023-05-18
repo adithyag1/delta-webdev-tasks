@@ -230,5 +230,6 @@ view_button.onclick = function() {
     else{
         leaderboard_div.style.display="none";
         wrapper.style.display="flex";
+        sizeform.style.display="block";
     }
 }
