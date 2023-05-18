@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="hacker.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="hacker.js" defer></script>
+  </head>
+  <button id="view-leaderboard">Show/Hide Leaderboard</button>
+  <div class="leaderboard_div">
+    <table class="leaderboard" border>
+    </table>
+  </div>
+  <form id="sizeform">
+    <label for="grid-size">Enter grid size:
+      <input id="grid-size" type="number" placeholder="15-50" min="15" max="50" required>
+      <input type="submit">
+    </label>
+  </form>
+  <body>
+    <div class="wrapper">
+      <div class="starttime">
+        <div class="lives_container"><div>&hearts; :</div><div class="lives">3</div></div>
+        <div class="startbtn"><button id="start">Play</button></div>
+        <div class="pause_btn"><button id="pause">Pause</button></div>
+        <div class="time">02:30</div>
+      </div>
+      <div class="game-details">
+        <div class="score">0</div>
+        <div class="word">WORD</div>
+        <div class="high-score">0</div>
+      </div>
+      <div class="play-board"></div>
+      <div class="controls">
+        <i data-key="ArrowLeft">&larr;</i>
+        <i data-key="ArrowUp">&uarr;</i>
+        <i data-key="ArrowRight">&rarr;</i>
+        <i data-key="ArrowDown">&darr;</i>
+      </div>
+    </div>
+  </body>
+</html>
