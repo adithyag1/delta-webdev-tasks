@@ -58,6 +58,14 @@ for(let i=0;rank(intscores[i])<=10;i++){
 htm+=`</table>`;
 leaderboard_div.innerHTML=htm;
 
+//.includes() doesnt work for checking array in 2darrays
+function contains(arr2d,arr){
+    for(let i=0;i<arr2d.length;i++){
+        if(arr2d[i][0]==arr[0]&&arr2d[i][1]==arr[1]) return true;
+    }
+    return false;
+}
+
 //timer
 const countdown = () => {
     time--;
@@ -93,7 +101,7 @@ const newfoods = () => {
         let foodX = Math.floor(Math.random() * 20) + 1;
         let foodY = Math.floor(Math.random() * 20) + 1;
         //position should not be repeated or on the snake or immediate next to the head while starting
-        if(!((foods_positions.includes([foodX,foodY]))||snake.includes([foodX,foodY])||(Math.abs(foodX-headx)<=3&&Math.abs(foodY-heady)<=3))){
+        if(!(contains(foods_positions,[foodX,foodY])||contains(snake,[foodX,foodY])||(Math.abs(headx-foodX)<=3&&Math.abs(heady-foodY)<=3)||!playing&&foodY===5)){
             foods_positions.push([foodX,foodY]);
         }
     }
