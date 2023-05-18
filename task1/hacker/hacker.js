@@ -328,5 +328,6 @@ view_button.onclick = function() {
         leaderboard_div.style.display="none";
         wrapper.style.display="flex";
         sizeform.style.display="none";
+        sizeform.style.display="block";
     }
 }
