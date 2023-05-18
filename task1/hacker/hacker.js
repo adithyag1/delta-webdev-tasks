@@ -322,7 +322,6 @@ view_button.onclick = function() {
     if(leaderboard_div.style.display==="none"){
         leaderboard_div.style.display="block";
         wrapper.style.display="none";
-        sizeform.style.display="none";
     }
     else{
         leaderboard_div.style.display="none";
