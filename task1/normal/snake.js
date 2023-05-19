@@ -25,6 +25,7 @@ let game_interval;
 let score = 0;
 let foods_positions=[];
 let foods_colours=[];
+let playing=false;
 let eaten=0;
 let time=151;
 let html1;
@@ -215,6 +216,7 @@ const start_game = () => {
 
 start_button.onclick = function () {
         start_button.onclick = null; //pressing start after it is started will not affect the game.
+        playing=true;
         newfoods();
         setInterval(countdown, 1000);
         document.addEventListener("keyup", change_direction);
