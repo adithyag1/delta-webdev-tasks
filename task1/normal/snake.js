@@ -215,7 +215,6 @@ const start_game = () => {
 
 start_button.onclick = function () {
         start_button.onclick = null; //pressing start after it is started will not affect the game.
-        playing=true;
         newfoods();
         setInterval(countdown, 1000);
         document.addEventListener("keyup", change_direction);
