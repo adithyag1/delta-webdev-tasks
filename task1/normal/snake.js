@@ -25,7 +25,6 @@ let game_interval;
 let score = 0;
 let foods_positions=[];
 let foods_colours=[];
-let playing=false;
 let eaten=0;
 let time=151;
 let html1;
@@ -102,7 +101,7 @@ const newfoods = () => {
         let foodX = Math.floor(Math.random() * 20) + 1;
         let foodY = Math.floor(Math.random() * 20) + 1;
         //position should not be repeated or on the snake or immediate next to the head while starting
-        if(!(contains(foods_positions,[foodX,foodY])||contains(snake,[foodX,foodY])||(Math.abs(headx-foodX)<=3&&Math.abs(heady-foodY)<=3)||!playing&&foodY===5)){
+        if(!(contains(foods_positions,[foodX,foodY])||contains(snake,[foodX,foodY])||(Math.abs(headx-foodX)<=3&&Math.abs(heady-foodY)<=3)||first_run&&foodY===5)){
             foods_positions.push([foodX,foodY]);
         }
     }
