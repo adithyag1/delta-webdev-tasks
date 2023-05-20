@@ -178,12 +178,12 @@ const atespawn = () => {
     let lucky= Math.floor(Math.random()*2);
     if(lucky==0&&snake.length<=5) lucky=1;
     switch(lucky){
-        case 0:
+        case 0://make the snake shorter my removing tail
             snake.shift();
             snake.shift();
             break;
         case 1:
-            speed_time*=1.5; //this reduces the speed by increasing interval
+            speed_time+=20; //this reduces the speed by increasing interval
             break;
     }
     spawnx = -1;
