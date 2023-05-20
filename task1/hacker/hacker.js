@@ -93,7 +93,7 @@ function display(time){
     time_element.innerHTML=`${mins<10?"0":""}${mins}:${secs<10?"0":""}${secs}`;
 }
 let spawn_times=[];
-while(spawn_times.length<=8){ //appear 8 random times
+while(spawn_times.length<=5){ //appear 8 random times
     let random_time=Math.floor(Math.random()*120)+1; //can appear at 1 to 120 seconds
     if(!spawn_times.includes(random_time)){
         spawn_times.push(random_time);
@@ -127,7 +127,7 @@ function updatelives() {
     if (lives>0) {
         clearInterval(time_interval);
         if (confirm(msg + "\nLives: " + lives + "\nPress Play to continue")) {
-            playing = false;
+           playing  = false;
             play_game();
         }
         else {
@@ -178,12 +178,12 @@ const atespawn = () => {
     let lucky= Math.floor(Math.random()*2);
     if(lucky==0&&snake.length<=5) lucky=1;
     switch(lucky){
-        case 0://make the snake shorter my removing tail
+        case 0://make the snake shorter by removing tails
             snake.shift();
             snake.shift();
             break;
         case 1:
-            speed_time+=20; //this reduces the speed by increasing interval
+            speed_time*=1.03; //this reduces the speed by increasing interval
             break;
     }
     spawnx = -1;
