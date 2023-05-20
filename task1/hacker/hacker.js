@@ -183,7 +183,7 @@ const atespawn = () => {
             snake.shift();
             break;
         case 1:
-            speed_time*=1.03; //this reduces the speed by increasing interval
+            speed_time*=1.05; //this reduces the speed by increasing interval
             break;
     }
     spawnx = -1;
