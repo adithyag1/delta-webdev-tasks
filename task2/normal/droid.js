@@ -3,20 +3,9 @@ const ctx = canvas.getContext("2d");
 const size = Math.min(window.innerWidth, window.innerHeight)*0.95;
 
 //take relative to the window size
-canvas.width = size;
-canvas.height = size;
+canvas.width=size;
+canvas.height=size;
 
-
-//
-
-//
-
-//
-
-//player health bar keeps on growing to gray in left side, same with home_health
-
-
-//
 let home_health=10;
 let player_health=10;
 let bots=[];
@@ -70,21 +59,11 @@ function shoot(event){
 
 function draw_everything(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-// Create a radial gradient
-const gradient = ctx.createRadialGradient(
-  size / 2, // Start X coordinate (center X)
-  size / 2, // Start Y coordinate (center Y)
-  0, // Start radius (inner circle)
-  size / 2, // End X coordinate (center X)
-  size / 2, // End Y coordinate (center Y)
-  size / 2 // End radius (outer circle)
-);
-gradient.addColorStop(0, "rgb(112,58,110)"); // Start color at the center
-gradient.addColorStop(1, "rgb(85,51,90)"); // End color at the outer circle
-
-// Fill a rectangle with the gradient
-ctx.fillStyle = gradient;
-ctx.fillRect(0, 0, size, size);
+    const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+    gradient.addColorStop(0, "rgb(112,58,110)"); // Start color at the center
+    gradient.addColorStop(1, "rgb(85,51,90)"); // End color at the outer circle
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
 
     const player_rem = new Path2D();
     player_rem.rect(size * 0.01, size * 0.01, size * 0.4, size * 0.025);
@@ -238,8 +217,6 @@ function reloadPage() {
     alert("Game over! Your score: " + score);
     location.reload(true);
 }
-  
-  
 
 document.addEventListener("keydown",move_player);
 document.addEventListener("mousedown",shoot);
