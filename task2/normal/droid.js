@@ -46,7 +46,7 @@ function shoot(event){
     //clientX and clientY are positions of mouse absolutely
     //to find it relative to the canvas subtract canvas positions from it
     let delx=event.clientX-rect.left-(playerx-size*0.01);
-    let dely=event.clientY-rect.top-(size*0.8-size*0.05-size*0.03-size*0.02);
+    let dely=event.clientY-rect.top-(size*0.9-size*0.05-size*0.03-size*0.02);
     const bullet={
         x: playerx-size*0.01,
         y: size*0.9-size*0.05-size*0.03-size*0.02,
