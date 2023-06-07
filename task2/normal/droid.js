@@ -195,10 +195,10 @@ function draw_everything(){
 
             //check if it hits the player and decrease playerhealth
             if (
-                size*0.85 < bots[i][1] + size * 0.03 &&
-                size*0.95 > bots[i][1] &&
-                playerx - size*0.05 < bots[i][0] + size * 0.03 &&
-                playerx + size*0.05 > bots[i][0]
+                playery-size*0.05 < bots[i][1] + size * 0.03 &&
+                playery+size*0.05 > bots[i][1] &&
+                playerx-size*0.05 < bots[i][0] + size * 0.03 &&
+                playerx+size*0.05 > bots[i][0]
                 )
             {
                 player_health--;
