@@ -12,17 +12,25 @@ let bots=[];
 let bullets=[];
 let player_direction=0;
 let playerx=size*0.1;
+let playery=size*0.9;
 let clear=false;
 let score=10;
 let started=false;
+let mousex=0;
+let mousey=0;
+
+function setbots(){
+    if(!started){
+    started=true;
+    setInterval(function(){
+        bots.push([Math.random()*0.92*size,size*0.05]);
+    },2000);
+}
+
+}
 
 function move_player(event){
-    if(!started){
-        started=true;
-        setInterval(function(){
-            bots.push([Math.random()*0.92*size,size*0.05]);
-        },2000);
-    }
+    setbots();
     if(event.key==="ArrowLeft"){
         player_direction=-1;
     }
@@ -35,26 +43,33 @@ function move_player(event){
 
 
 function shoot(event){
-    if(!started){
-        started=true;
-        setInterval(function(){
-            bots.push([Math.random()*0.92*size,size*0.05]);
-        },2000);
-    }
-    const rect = canvas.getBoundingClientRect();
-    //rect gets the position of canvas top left point
+    setbots();
     //clientX and clientY are positions of mouse absolutely
     //to find it relative to the canvas subtract canvas positions from it
-    let delx=event.clientX-rect.left-(playerx-size*0.01);
-    let dely=event.clientY-rect.top-(size*0.9-size*0.05-size*0.03-size*0.02);
+    let delx=event.clientX-rect.left-playerx;
+    let dely=event.clientY-rect.top-playery;
+    let pyth=Math.sqrt(delx*delx+dely*dely);
     const bullet={
-        x: playerx-size*0.01,
-        y: size*0.9-size*0.05-size*0.03-size*0.02,
-        dx: delx*0.01 ,
-        dy: dely*0.01 ,
+        x: playerx,
+        y: playery,
+        dx: delx/pyth*8,
+        dy: dely/pyth*8,
         kills:0
     };
     bullets.push(bullet);
+}
+
+function drawline(event){
+    setbots();
+    mousex=event.clientX-rect.left;
+    mousey=event.clientY-rect.top;
+    ctx.strokeStyle="white";
+    ctx.beginPath();
+    ctx.moveTo(playerx,playery);
+    ctx.lineTo(mousex,mousey);
+    ctx.stroke();
+    ctx.closePath();
+
 }
 
 function draw_everything(){
@@ -132,17 +147,12 @@ function draw_everything(){
 
     if (playerx < size * 1.05 && playerx > -size * 0.05) {
         let player_body = new Path2D();
-        player_body.arc(playerx, size * 0.9, size * 0.05, 0, Math.PI * 2, true);
+        player_body.arc(playerx, playery, size * 0.05, 0, Math.PI * 2, true);
         ctx.fillStyle = "rgb(183,19,115)";
         ctx.fill(player_body);
         player_body.closePath();
-
-        let player_mouth = new Path2D();
-        player_mouth.rect(playerx - size * 0.015, size * 0.9 - size * 0.05 - size * 0.03, size * 0.03, size * 0.03);
-        ctx.fillStyle = "rgb(200,200,200)";
-        ctx.fill(player_mouth);
-        player_mouth.closePath();
     }
+
     else {
         if (playerx >= size * 1.05) {
             playerx = -size * 0.05;
@@ -220,3 +230,8 @@ function reloadPage() {
 
 document.addEventListener("keydown",move_player);
 document.addEventListener("mousedown",shoot);
+
+const rect = canvas.getBoundingClientRect();
+//rect gets the position of canvas top left point
+
+document.addEventListener("mousemove",drawline);
