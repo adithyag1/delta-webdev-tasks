@@ -18,8 +18,8 @@ const player = {
 };
 
 const spawn = {
-    x: -size * 0.1,
-    y: -size * 0.1,
+    x:-size*0.1,
+    y:-size*0.1,
     time: 0,
     eaten: false
 };
@@ -27,13 +27,13 @@ const spawn = {
 let home_health = 10;
 let bots = [];
 let bullets = [];
-let enemies = [];
+let enemies=[];
 let score = 10;
 let started = false;
 let mousex = 0;
 let mousey = 0;
 let time = 0;
-let enemy_health = 100;
+let enemy_health=100;
 let leaderboard = localStorage.getItem('leaderboard') || "";
 if (leaderboard[0] === ",") leaderboard = leaderboard.slice(1);
 if (leaderboard[leaderboard.length - 1] === ",") leaderboard = leaderboard.slice(0, -1);
@@ -59,7 +59,7 @@ htm += `</table>`;
 leaderboard_div.innerHTML = htm;
 
 function move_player(event) {
-    if (started) {
+    if(started){
         if (event.key === "ArrowLeft") {
             player.xdir = -1;
             player.ydir = 0;
@@ -82,7 +82,7 @@ function move_player(event) {
 }
 
 function shoot(event) {
-    if (started) {
+    if(started){
         //clientX and clientY are positions of mouse absolutely
         //to find it relative to the canvas subtract canvas positions from it
         if (event.clientX - rect.left > 0 && event.clientX - rect.left < size &&
@@ -102,8 +102,8 @@ function shoot(event) {
     }
 }
 
-function enemy_shoot() {
-    if (started) {
+function enemy_shoot(){
+    if(started&&enemy_health>0){
         let delx = player.x - size * 0.5;
         let dely = player.y - size * 0.1;
         let pyth = Math.sqrt(delx * delx + dely * dely);
@@ -118,7 +118,7 @@ function enemy_shoot() {
 }
 
 function drawline(event) {
-    if (started) {
+    if(started){
         mousex = event.clientX - rect.left;
         mousey = event.clientY - rect.top;
         if (mousex > 0 && mousex < size && mousey > 0 && mousey < size) {
@@ -130,15 +130,6 @@ function drawline(event) {
             ctx.closePath();
         }
     }
-}
-
-function sound() {
-    const audio_context = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audio_context.createOscillator();
-    oscillator.connect(audio_context.destination);
-    oscillator.type = "sine";
-    oscillator.start();
-    oscillator.stop(audio_context.currentTime + 0.1);//stops in 0.1 second
 }
 
 function draw_everything() {
@@ -200,27 +191,29 @@ function draw_everything() {
         bots[i][1] += size * 0.003;
     }
 
-    let player_body = new Path2D();
-    player_body.arc(size * 0.5, size * 0.1, size * 0.05, 0, Math.PI * 2, true);
-    ctx.fill(player_body);
-    player_body.closePath();
+    if(enemy_health>0){
+        let enemy_bot = new Path2D();
+        enemy_bot.arc(size * 0.5, size * 0.1, size * 0.05, 0, Math.PI * 2, true);
+        ctx.fill(enemy_bot);
+        enemy_bot.closePath();
+    }
 
-    if (started) {
+    if(started){
         ctx.fillStyle = "rgb(124,252,0)";
-        if (time % 2000 == 0) {
-            spawn.x = size * (Math.random() * 0.8 + 0.1);
-            spawn.y = size * (Math.random() * 0.4 + 0.2);
-            spawn.eaten = false;
-            spawn.time = 0;
+        if(time%2000==0){
+            spawn.x=size*(Math.random() * 0.8 + 0.1);
+            spawn.y=size*(Math.random() * 0.4 + 0.2);
+            spawn.eaten=false;
+            spawn.time=0;
         }
-        if (!spawn.eaten) ctx.fillRect(spawn.x, spawn.y, size * 0.03, size * 0.03);
+        if(!spawn.eaten) ctx.fillRect(spawn.x,spawn.y,size*0.03,size*0.03);
         spawn.time++;
     }
 
     //after some time the spawn will disapper
-    if (spawn.time === 800) {
-        spawn.x = -size * 0.1;
-        spawn.y = -size * 0.1;
+    if(spawn.time===800){
+        spawn.x=-size*0.1;
+        spawn.y=-size*0.1;
     }
 
     if (
@@ -229,12 +222,12 @@ function draw_everything() {
         player.x - size * 0.05 < spawn.x + size * 0.03 &&
         player.x + size * 0.05 > spawn.x
     ) {
-        if (home_health < 10) home_health++;
-        if (player.health <= 9) player.health++;
-        else if (player.health <= 10) player.health = 10;
-        spawn.eaten = true;
-        spawn.x = -size * 0.1;
-        spawn.y = -size * 0.1;
+        if(home_health<10) home_health++;
+        if(player.health<=9) player.health++;
+        else if(player.health<=10) player.health=10;
+        spawn.eaten=true;
+        spawn.x=-size*0.1;
+        spawn.y=-size*0.1;
     }
 
 
@@ -259,7 +252,7 @@ function draw_everything() {
         enemies[i].y += enemies[i].dy;
         if (!(enemies[i].y > 0 && enemies[i].y < size && enemies[i].x > 0 && enemies[i].x < size)) {
             enemies.splice(i, 1);
-        }
+        }          
     }
 
     if (player.x < size * 1.05 && player.x > -size * 0.05 &&
@@ -296,7 +289,6 @@ function draw_everything() {
                     bullets[j].y < bots[i][1] + size * 0.03 &&
                     bullets[j].y + size * 0.02 > bots[i][1]
                 ) {
-                    sound();
                     bots.splice(i, 1);
                     bullets[j].kills++;
                     score += 4;
@@ -338,53 +330,49 @@ function draw_everything() {
         catch (error) { }
     }
 
-    for (let i = 0; i < enemies.length; i++) {
-        for (let j = 0; j < bullets.length; i++) {
-            try {
-                if (
-                    enemies[j].x < bullets[i].x + size * 0.02 &&
-                    enemies[j].x + size * 0.03 > bullets[i].x &&
-                    enemies[j].y < bullets[i].y + size * 0.02 &&
-                    enemies[j].y + size * 0.03 > bullets[i].y
-                ) {
-                    enemies.splice(i, 1);
-                    bullets[i].kills++;
-                }
+    for(let i=0;i<enemies.length;i++){
+        for(let j=0;j<bullets.length;i++){
+            if (
+                enemies[i].x < bullets[j].x + size * 0.02 &&
+                enemies[i].x + size * 0.03 > bullets[j].x &&
+                enemies[i].y < bullets[j].y + size * 0.02 &&
+                enemies[i].y + size * 0.03 > bullets[j].y
+            ) {
+                enemies.splice(i,1);
+                bullets[i].kills++;
             }
-            catch (error) { }
+        
         }
-
-    }
-    try {
-        if (
-            size * 0.1 - size * 0.05 < bullets[i].y + size * 0.03 &&
-            size * 0.1 + size * 0.05 > bullets[i].y &&
-            size * 0.5 - size * 0.05 < bullets[i].x + size * 0.03 &&
-            size * 0.5 + size * 0.05 > bullets[i].x
-        ) {
-            enemy_health--;
-            bullets.splice(i, 1);
-        }
-    }
-    catch (error) { }
-
-    for (let j = 0; j < bullets.length; i++) {
         if (
             player.y - size * 0.05 < enemies[i].y + size * 0.03 &&
             player.y + size * 0.05 > enemies[i].y &&
             player.x - size * 0.05 < enemies[i].x + size * 0.03 &&
             player.x + size * 0.05 > enemies[i].x
         ) {
-            enemies.splice(i, 1);
-            bullets[i].kills++;
+            enemies.splice(i,1);
+            player.health-=0.25;
         }
+          
 
+    }
+
+    for(let i=0;i<bullets.length;i++){
+        if (
+            size * 0.1 - size * 0.05 < bullets[i].y + size * 0.03 &&
+            size * 0.1 + size * 0.05 > bullets[i].y &&
+            size * 0.5 - size * 0.05 < bullets[i].x + size * 0.03 &&
+            size * 0.5 + size * 0.05 > bullets[i].x
+          ) {
+            enemy_health--;
+            bullets.splice(i,1);
+        }
+    
     }
 
     if (player.health <= 0 || home_health <= 0) {
         return reloadPage();
     }
-    if (started) time++;
+    if(started) time++;
 }
 
 game_interval = setInterval(draw_everything, 15);
@@ -400,13 +388,13 @@ function reloadPage() {
 
 document.addEventListener("keydown", move_player);
 document.addEventListener("mousedown", shoot);
-setInterval(enemy_shoot, 5000);
+setInterval(enemy_shoot,5000);
 const rect = canvas.getBoundingClientRect();
 //rect gets the position of canvas top left point
 
 document.addEventListener("mousemove", drawline);
 
-startbtn.onclick = function () {
+startbtn.onclick=function(){
     if (!started) {
         started = true;
         setInterval(function () {
@@ -415,7 +403,7 @@ startbtn.onclick = function () {
     }
 }
 view_button.onclick = function () {
-    if (!started) {
+    if(!started){
         if (leaderboard_div.style.display === "none") {
             leaderboard_div.style.display = "block";
             canvas.style.display = "none";
@@ -423,6 +411,6 @@ view_button.onclick = function () {
         else {
             leaderboard_div.style.display = "none";
             canvas.style.display = "flex";
-        }
+        }   
     }
 }
