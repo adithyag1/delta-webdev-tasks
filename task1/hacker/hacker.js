@@ -93,7 +93,7 @@ function display(time){
     time_element.innerHTML=`${mins<10?"0":""}${mins}:${secs<10?"0":""}${secs}`;
 }
 let spawn_times=[];
-while(spawn_times.length<=5){ //appear 8 random times
+while(spawn_times.length<=5){ //appear 5 random times
     let random_time=Math.floor(Math.random()*120)+1; //can appear at 1 to 120 seconds
     if(!spawn_times.includes(random_time)){
         spawn_times.push(random_time);
