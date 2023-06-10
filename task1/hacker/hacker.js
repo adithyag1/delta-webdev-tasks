@@ -292,7 +292,7 @@ function sound(){
     oscillator.connect(audio_context.destination);
     oscillator.type="sine";
     oscillator.start();
-    oscillator.stop(audio_context.currentTime+0.1);//stops in 1 second
+    oscillator.stop(audio_context.currentTime+0.1);//stops in 0.1 second
 }
 
 const play_game = () => {
