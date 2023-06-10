@@ -7,17 +7,20 @@ canvas.width=size;
 canvas.height=size;
 
 let home_health=10;
-let player_health=10;
 let bots=[];
 let bullets=[];
 let player_direction=0;
-let playerx=size*0.1;
-let playery=size*0.9;
 let clear=false;
 let score=10;
 let started=false;
 let mousex=0;
 let mousey=0;
+
+let player={
+    x:size*0.1,
+    y:size*0.9,
+    health:10
+};
 
 function setbots(){
     if(!started){
@@ -37,7 +40,7 @@ function move_player(event){
     else if(event.key==="ArrowRight"){
         player_direction=1;
     }
-    playerx+=player_direction*size*0.01;
+    player.x+=player_direction*size*0.01;
     clear=true;
 }
 
@@ -46,12 +49,12 @@ function shoot(event){
     setbots();
     //clientX and clientY are positions of mouse absolutely
     //to find it relative to the canvas subtract canvas positions from it
-    let delx=event.clientX-rect.left-playerx;
-    let dely=event.clientY-rect.top-playery;
+    let delx=event.clientX-rect.left-player.x;
+    let dely=event.clientY-rect.top-player.y;
     let pyth=Math.sqrt(delx*delx+dely*dely);
     const bullet={
-        x: playerx,
-        y: playery,
+        x: player.x,
+        y: player.y,
         dx: delx/pyth*8,
         dy: dely/pyth*8,
         kills:0
@@ -65,7 +68,7 @@ function drawline(event){
     mousey=event.clientY-rect.top;
     ctx.strokeStyle="white";
     ctx.beginPath();
-    ctx.moveTo(playerx,playery);
+    ctx.moveTo(player.x,player.y);
     ctx.lineTo(mousex,mousey);
     ctx.stroke();
     ctx.closePath();
@@ -88,7 +91,7 @@ function draw_everything(){
 
 
     const player_bar = new Path2D();
-    player_bar.rect(size * 0.01 + player_health * size * 0.4 / 10, size * 0.01, size * 0.4 - player_health*size*0.4/10, size * 0.025);
+    player_bar.rect(size * 0.01 + player.health * size * 0.4 / 10, size * 0.01, size * 0.4 - player.health*size*0.4/10, size * 0.025);
     ctx.fillStyle = "rgb(200,200,200)";
     ctx.fill(player_bar);
     player_bar.closePath();
@@ -145,20 +148,20 @@ function draw_everything(){
         }
     }
 
-    if (playerx < size * 1.05 && playerx > -size * 0.05) {
+    if (player.x < size * 1.05 && player.x > -size * 0.05) {
         let player_body = new Path2D();
-        player_body.arc(playerx, playery, size * 0.05, 0, Math.PI * 2, true);
+        player_body.arc(player.x, player.y, size * 0.05, 0, Math.PI * 2, true);
         ctx.fillStyle = "rgb(183,19,115)";
         ctx.fill(player_body);
         player_body.closePath();
     }
 
     else {
-        if (playerx >= size * 1.05) {
-            playerx = -size * 0.05;
+        if (player.x >= size * 1.05) {
+            player.x = -size * 0.05;
         }
-        else if (playerx <= -size * 0.05) {
-            playerx = size * 1.05;
+        else if (player.x <= -size * 0.05) {
+            player.x = size * 1.05;
         }
     }
 
@@ -195,13 +198,13 @@ function draw_everything(){
 
             //check if it hits the player and decrease playerhealth
             if (
-                playery-size*0.05 < bots[i][1] + size * 0.03 &&
-                playery+size*0.05 > bots[i][1] &&
-                playerx-size*0.05 < bots[i][0] + size * 0.03 &&
-                playerx+size*0.05 > bots[i][0]
+                player.y-size*0.05 < bots[i][1] + size * 0.03 &&
+                player.y+size*0.05 > bots[i][1] &&
+                player.x-size*0.05 < bots[i][0] + size * 0.03 &&
+                player.x+size*0.05 > bots[i][0]
                 )
             {
-                player_health--;
+                player.health--;
                 bots.splice(i,1);
             }
 
@@ -215,7 +218,7 @@ function draw_everything(){
         catch(error){}
     }
 
-    if(player_health<=0||home_health<=0){
+    if(player.health<=0||home_health<=0){
         return reloadPage();
     }
 }
