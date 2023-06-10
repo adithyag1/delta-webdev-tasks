@@ -342,6 +342,7 @@ function draw_everything() {
 
     for(let i=0;i<enemies.length;i++){
         for(let j=0;j<bullets.length;j++){
+            try{
             if (
                 enemies[i].x < bullets[j].x + size * 0.02 &&
                 enemies[i].x + size * 0.03 > bullets[j].x &&
@@ -351,6 +352,8 @@ function draw_everything() {
                 enemies.splice(i,1);
                 bullets[i].kills++;
             }
+        }
+        catch(error){}
         
         }
         if (
@@ -362,8 +365,15 @@ function draw_everything() {
             enemies.splice(i,1);
             player.health-=0.25;
         }
-          
-
+        if (
+            size*0.7 < enemies[i].y + size * 0.03 &&
+            size*0.8 > enemies[i].y &&
+            size*0.3 < enemies[i].x + size * 0.03 &&
+            size*0.7 > enemies[i].x
+        ) {
+            enemies.splice(i,1);
+            home.health-=0.25;
+        }
     }
 
     for(let i=0;i<bullets.length;i++){
