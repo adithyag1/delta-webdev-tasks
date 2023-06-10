@@ -341,7 +341,7 @@ function draw_everything() {
     }
 
     for(let i=0;i<enemies.length;i++){
-        for(let j=0;j<bullets.length;i++){
+        for(let j=0;j<bullets.length;j++){
             if (
                 enemies[i].x < bullets[j].x + size * 0.02 &&
                 enemies[i].x + size * 0.03 > bullets[j].x &&
