@@ -132,6 +132,15 @@ function drawline(event) {
     }
 }
 
+function sound(){
+    const audio_context=new(window.AudioContext||window.webkitAudioContext)();
+    const oscillator = audio_context.createOscillator();
+    oscillator.connect(audio_context.destination);
+    oscillator.type="sine";
+    oscillator.start();
+    oscillator.stop(audio_context.currentTime+0.1);//stops in 0.1 second
+}
+
 function draw_everything() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
@@ -292,6 +301,7 @@ function draw_everything() {
                     bots.splice(i, 1);
                     bullets[j].kills++;
                     score += 4;
+                    sound();
                 }
             }
             catch (error) { }
