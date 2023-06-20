@@ -1,0 +1,139 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    background-color: greenyellow;
+  }
+  
+  tr{
+    align-items: center;
+    height: 20px;
+  }
+  
+  td{
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .wrapper {
+    margin-top: 2%;
+    width: 65vmin;
+    height: 80vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid green;
+  }
+  
+  .starttime{
+    box-sizing: border-box;
+    display: flex;
+    height: 5vmin;
+    width: 65vmin;
+    background-color: green;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .game-details {
+    height: 5vmin;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid green;
+    font-size: 1rem;
+    align-items: center;
+  }
+  
+  .startbtn{
+    border-bottom: 2px solid green;
+  }
+  
+  #start, #pause{
+    align-self: center;
+    background-color: greenyellow
+  }
+  
+  .lives_container{
+    display: flex;
+    color: greenyellow;
+  }
+  
+  .time{
+    color:greenyellow;
+    border-bottom: 2px solid green;
+  }
+  
+  #view-leaderboard{
+   margin-bottom: 2%;
+  }
+  
+  .leaderboard_div{
+    display: none;
+    margin-top: 2%;
+  }
+  
+  .play-board {
+    box-sizing: border-box;
+    height: 65vmin;
+    width: 65vmin;
+    display: grid;
+  }
+  
+  
+  .play-board .head {
+    background:greenyellow;
+  }
+  
+  .play-board .body{
+    background: darkgreen;
+  }
+  
+  .eatenfood{
+    background-color: white;
+  }
+
+  .portal{
+    box-sizing: border-box;
+    background-color: black;
+    border: 3px solid yellow;
+  }
+
+  .obstacle{
+    background-color: brown;
+  }
+  
+  table{
+    background-color: green;
+    color: greenyellow;
+    border:2px solid greenyellow;
+  }
+  
+  .leaderboard {
+    width: 70vmin;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    width: 65vmin;
+    height: 5vmin;
+    box-sizing: border-box;
+  }
+  
+  .controls i {
+    text-align: center;
+    font-size: 1.3rem;
+    color: greenyellow;
+    background-color: green;
+    width: 25%;
+    cursor: pointer;
+    border: 1px solid greenyellow;
+  }
+  
+  #sizeform{
+    display:flex;
+  }
